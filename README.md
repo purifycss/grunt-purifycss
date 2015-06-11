@@ -19,29 +19,9 @@ grunt.loadNpmTasks('grunt-purifycss');
 
 ## The "purifycss" task
 
-### Overview
-In your project's Gruntfile, add a section named `purifycss` to the data object passed into `grunt.initConfig()`.
-
-```js
-grunt.initConfig({
-  purifycss: {
-    options: {
-      // Task-specific options go here.
-    },
-    your_target: {
-      // Target-specific file lists and/or options go here.
-    },
-  },
-});
-```
-
-### Options
-
-
 ### Usage Examples
 
-#### Default Options
-In this example, the default options are used to do something with whatever. So if the `testing` file has the content `Testing` and the `123` file had the content `1 2 3`, the generated result would be `Testing, 1 2 3.`
+In this example, the default options are to specify a target with src files, style files, and an output destination. The plugin will search for style selectors used in the source files, and then output a trimmed down style sheet.
 
 ```js
 grunt.initConfig({
@@ -58,7 +38,3 @@ grunt.initConfig({
 
 ## Contributing
 In lieu of a formal styleguide, take care to maintain the existing coding style. Add unit tests for any new or changed functionality. Lint and test your code using [Grunt](http://gruntjs.com/).
-
-## Release History
-
-# grunt-purify-css
