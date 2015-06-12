@@ -39,6 +39,6 @@
   ],
   "dependencies": {
     "glob": "^5.0.10",
-    "purify-css": "^1.0.3"
+    "purify-css": "^1.0.x"
   }
 }

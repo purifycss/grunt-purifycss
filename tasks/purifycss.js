@@ -13,9 +13,6 @@ var purify = require('purify-css');
 
 module.exports = function(grunt) {
 
-  // Please see the Grunt documentation for more information regarding task
-  // creation: http://gruntjs.com/creating-tasks
-
   grunt.registerMultiTask('purifycss', 'Clean unnecessary CSS', function() {
     // Merge task-specific and/or target-specific options with these defaults.
     var options = this.options({
@@ -24,19 +21,16 @@ module.exports = function(grunt) {
     var src = [];
     this.data.src.forEach(function(pathPattern) {
       var files = glob.sync(pathPattern);
-      console.log("glob files: ", files);
+      console.log("Source Files: ", files);
       src = src.concat(files);
     });
 
     var styles = [];
     this.data.css.forEach(function(pathPattern) {
-      var files = glob.sync(pathPattern);
-      console.log("glob styles: ", files);
-      styles = styles.concat(files);
-    })
-
-    console.log(src);
-    console.log(styles);
+      var style = glob.sync(pathPattern);
+      console.log("Style Files: ", style);
+      styles = styles.concat(style);
+    });
 
     var pure = purify(src, styles, {write: false, info: true});
 

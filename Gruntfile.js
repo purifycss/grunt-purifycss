@@ -47,17 +47,19 @@ module.exports = function(grunt) {
         },
       },
       test: {
-
         src: ['test/fixtures/*.html'],
         css: ['test/fixtures/styles.css'],
-        dest: 'tmp/purestyles.css',
-        hello: 'hello world'
+        dest: 'tmp/purestyles.css'
+      },
+      goose: {
+        src: [
+          'Goose-Windmill/public/app/**/*.html', 
+          'Goose-Windmill/public/app/**/*.js',
+          'Goose-Windmill/public/index.html'
+          ],
+        css: ['Goose-Windmill/public/styles/*.css'],
+        dest: 'tmp/gooseCSS.css'
       }
-    },
-
-    // Unit tests.grunt
-    nodeunit: {
-      tests: ['test/*_test.js']
     }
 
   });
@@ -68,11 +70,10 @@ module.exports = function(grunt) {
   // These plugins provide necessary tasks.
   grunt.loadNpmTasks('grunt-contrib-jshint');
   grunt.loadNpmTasks('grunt-contrib-clean');
-  grunt.loadNpmTasks('grunt-contrib-nodeunit');
 
   // Whenever the "test" task is run, first clean the "tmp" dir, then run this
   // plugin's task(s), then test the result.
-  grunt.registerTask('test', ['clean', 'purifycss', 'nodeunit']);
+  grunt.registerTask('test', ['clean', 'purifycss:test', 'nodeunit']);
 
   // By default, lint and run all tests.
   grunt.registerTask('default', ['purifycss:test']);
