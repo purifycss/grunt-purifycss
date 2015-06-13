@@ -25,17 +25,31 @@ module.exports = function(grunt) {
       src = src.concat(files);
     });
 
-    var styles = [];
-    this.data.css.forEach(function(pathPattern) {
-      var style = glob.sync(pathPattern);
-      console.log("Style Files: ", style);
-      styles = styles.concat(style);
-    });
+     if (this.data.replace) {
+      // Replace the css files that are given in css
+      this.data.css.forEach(function(pathPattern) {
+        var files = glob.sync(pathPattern);
+        console.log("Style Files: ", files);
+        files.forEach(function(file) {
+          var purified = purify(src, [file], {write: false, info: true});
+          grunt.file.write(file, purified);
+          grunt.log.writeln('Css File "' + file + '" optimized.');
+        });
+      });
 
-    var pure = purify(src, styles, {write: false, info: true});
+    } else {
+      var styles = [];
+      this.data.css.forEach(function(pathPattern) {
+        var style = glob.sync(pathPattern);
+        console.log("Style Files: ", style);
+        styles = styles.concat(style);
+      });
 
-    grunt.file.write(this.data.dest, pure);
-    grunt.log.writeln('File "' + this.data.dest + '" created.');
+      var pure = purify(src, styles, {write: false, info: true});
+
+      grunt.file.write(this.data.dest, pure);
+      grunt.log.writeln('File "' + this.data.dest + '" created.');
+    }
   });
 
 };
