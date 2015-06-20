@@ -19,14 +19,14 @@ module.exports = function(grunt) {
     });
 
     var src = [];
-    this.data.src.forEach(function(pathPattern) {
+    this.data.target.src.forEach(function(pathPattern) {
       var files = glob.sync(pathPattern);
       console.log("Source Files: ", files);
       src = src.concat(files);
     });
 
     var styles = [];
-    this.data.css.forEach(function(pathPattern) {
+    this.data.target.css.forEach(function(pathPattern) {
       var style = glob.sync(pathPattern);
       console.log("Style Files: ", style);
       styles = styles.concat(style);
@@ -34,7 +34,7 @@ module.exports = function(grunt) {
 
     var pure = purify(src, styles, {write: false, info: true});
 
-    grunt.file.write(this.data.dest, pure);
+    grunt.file.write(this.data.target.dest, pure);
     grunt.log.writeln('File "' + this.data.dest + '" created.');
   });
 
