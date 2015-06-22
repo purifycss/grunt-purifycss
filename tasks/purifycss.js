@@ -32,7 +32,7 @@ module.exports = function(grunt) {
       styles = styles.concat(style);
     });
 
-    var pure = purify(src, styles, {write: false, info: true});
+    var pure = purify(src, styles, options);
 
     grunt.file.write(this.data.dest, pure);
     grunt.log.writeln('File "' + this.data.dest + '" created.');
