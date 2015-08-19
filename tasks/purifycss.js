@@ -18,19 +18,11 @@ module.exports = function(grunt) {
     var options = this.options({
     });
 
-    var src = [];
-    this.data.src.forEach(function(pathPattern) {
-      var files = glob.sync(pathPattern);
-      console.log("Source Files: ", files);
-      src = src.concat(files);
-    });
+    var src = grunt.file.expand(this.data.src);
+    grunt.verbose.writeln('Source files:', src);
 
-    var styles = [];
-    this.data.css.forEach(function(pathPattern) {
-      var style = glob.sync(pathPattern);
-      console.log("Style Files: ", style);
-      styles = styles.concat(style);
-    });
+    var styles = grunt.file.expand(this.data.css);
+    grunt.verbose.writeln('Style files:', styles);
 
     var pure = purify(src, styles, {write: false, info: true});
 
