@@ -12,11 +12,15 @@ var glob = require('glob');
 var purify = require('purify-css');
 
 module.exports = function(grunt) {
+  
+  var DEFAULT_OPTIONS = {
+    write: false,
+    info: true
+  };
 
   grunt.registerMultiTask('purifycss', 'Clean unnecessary CSS', function() {
     // Merge task-specific and/or target-specific options with these defaults.
-    var options = this.options({
-    });
+    var options = this.options(DEFAULT_OPTIONS);
 
     var src = [];
     this.data.src.forEach(function(pathPattern) {
@@ -32,7 +36,7 @@ module.exports = function(grunt) {
       styles = styles.concat(style);
     });
 
-    var pure = purify(src, styles, {write: false, info: true});
+    var pure = purify(src, styles, options);
 
     grunt.file.write(this.data.dest, pure);
     grunt.log.writeln('File "' + this.data.dest + '" created.');
