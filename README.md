@@ -1,6 +1,6 @@
 # grunt-purifycss
 
-> Clean unnecessary CSS
+Clean unnecessary CSS with [PurifyCSS](https://github.com/purifycss/purifycss)
 
 ## Getting Started
 This plugin requires Grunt `~0.4.5`
